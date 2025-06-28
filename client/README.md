@@ -81,3 +81,16 @@ npm run dev
 ```bash
 npm run build
 npm run preview
+```
+
+{
+  "builds": [
+    { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
+  ]
+}
+
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+}
