@@ -1,0 +1,43 @@
+# Intervue Poll
+
+A real-time live polling system for classrooms, interviews, or events. Teachers can create and manage polls, students can join, answer, and chat live. Built with React (frontend) and Node.js/Express + Socket.IO (backend).
+
+---
+
+## Features
+
+- **Teacher Dashboard:**  
+  - Create, launch, and end polls  
+  - View live results and poll history  
+  - Kick students  
+  - Real-time chat with students
+
+- **Student Dashboard:**  
+  - Join polls with your name  
+  - Answer live questions  
+  - See results after submission  
+  - Real-time chat with teacher and classmates
+
+- **Poll History:**  
+  - Teachers can view past polls and winning options
+
+- **Responsive UI:**  
+  - Works on desktop and mobile
+
+---
+
+## Tech Stack
+
+- **Frontend:** React, Socket.IO-client
+- **Backend:** Node.js, Express, Socket.IO
+- **Deployment:** [Render](https://render.com/) / [Railway](https://railway.app/) / [Vercel](https://vercel.com/) / [Netlify](https://netlify.com/)
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```sh
+git clone https://github.com/adityasinha513/Intervue-Poll.git
+cd Intervue-Poll
