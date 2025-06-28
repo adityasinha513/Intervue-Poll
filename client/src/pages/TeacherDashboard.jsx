@@ -108,75 +108,286 @@ const TeacherDashboard = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fff', padding: '0 0 80px 0' }}>
-      <div style={{ maxWidth: 820, margin: '0 auto', padding: '48px 0 0 0' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#fff', 
+      padding: '20px',
+      boxSizing: 'border-box'
+    }}>
+      <div style={{ 
+        maxWidth: 820, 
+        margin: '0 auto', 
+        padding: '20px 0 0 0' 
+      }}>
         {/* Badge */}
-        <div style={{ marginBottom: 32 }}>
-          <span style={{ background: palette.primary, color: '#fff', borderRadius: 16, padding: '7px 22px', fontWeight: 700, fontSize: 17 }}>✨ Intervue Poll</span>
+        <div style={{ marginBottom: 24, textAlign: 'center' }}>
+          <span style={{ 
+            background: palette.primary, 
+            color: '#fff', 
+            borderRadius: 16, 
+            padding: '7px 22px', 
+            fontWeight: 700, 
+            fontSize: 'clamp(15px, 4vw, 17px)' 
+          }}>
+            ✨ Intervue Poll
+          </span>
         </div>
+        
         {/* Heading */}
-        <h2 style={{ fontWeight: 400, fontSize: '2.7rem', marginBottom: 8, color: palette.text, lineHeight: 1.1 }}>
+        <h2 style={{ 
+          fontWeight: 400, 
+          fontSize: 'clamp(2rem, 6vw, 2.7rem)', 
+          marginBottom: 8, 
+          color: palette.text, 
+          lineHeight: 1.1,
+          textAlign: 'center'
+        }}>
           Let's <span style={{ fontWeight: 800 }}>Get Started</span>
         </h2>
+        
         {/* Subtitle */}
-        <div style={{ color: palette.textSecondary, fontSize: 18, marginBottom: 40, fontWeight: 500, maxWidth: 600 }}>
-          you'll have the ability to create and manage polls, ask questions, and monitor your students' responses in real-time.
+        <div style={{ 
+          color: palette.textSecondary, 
+          fontSize: 'clamp(16px, 4vw, 18px)', 
+          marginBottom: 32, 
+          fontWeight: 500, 
+          maxWidth: 600,
+          textAlign: 'center',
+          margin: '0 auto 32px auto',
+          lineHeight: 1.4
+        }}>
+          You'll have the ability to create and manage polls, ask questions, and monitor your students' responses in real-time.
         </div>
+        
         {/* Form */}
         <form onSubmit={handleStartPoll} style={{ marginBottom: 0 }}>
           {/* Question input row */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
-            <div style={{ fontWeight: 700, fontSize: 18, color: palette.text }}>Enter your question</div>
-            <select value={duration} onChange={e => setDuration(Number(e.target.value))} style={{ padding: '10px 24px', borderRadius: 18, border: 'none', fontWeight: 600, fontSize: 16, color: palette.primary, background: palette.bg, boxShadow: '0 1px 4px #0001', outline: 'none', cursor: 'pointer', appearance: 'none', minWidth: 140, textAlign: 'right' }} disabled={pollStarted}>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            gap: '12px',
+            marginBottom: 18 
+          }}>
+            <div style={{ 
+              fontWeight: 700, 
+              fontSize: 'clamp(16px, 4vw, 18px)', 
+              color: palette.text 
+            }}>
+              Enter your question
+            </div>
+            <select 
+              value={duration} 
+              onChange={e => setDuration(Number(e.target.value))} 
+              style={{ 
+                padding: '12px 16px', 
+                borderRadius: 12, 
+                border: 'none', 
+                fontWeight: 600, 
+                fontSize: 'clamp(14px, 3.5vw, 16px)', 
+                color: palette.primary, 
+                background: palette.bg, 
+                boxShadow: '0 1px 4px #0001', 
+                outline: 'none', 
+                cursor: 'pointer', 
+                appearance: 'none',
+                width: '100%',
+                maxWidth: '200px'
+              }} 
+              disabled={pollStarted}
+            >
               {DURATIONS.map(d => <option key={d} value={d}>{d} seconds</option>)}
             </select>
           </div>
+          
           {/* Textarea with char count inside */}
-          <div style={{ position: 'relative', marginBottom: 32 }}>
+          <div style={{ position: 'relative', marginBottom: 24 }}>
             <textarea
               value={question}
               onChange={e => setQuestion(e.target.value.slice(0, 100))}
               placeholder="Type your question here..."
               maxLength={100}
               rows={3}
-              style={{ width: '100%', padding: '28px 24px 36px 24px', borderRadius: 12, border: 'none', fontSize: 19, background: palette.bg, resize: 'none', fontWeight: 600, color: palette.text, boxSizing: 'border-box', minHeight: 90 }}
+              style={{ 
+                width: '100%', 
+                padding: '20px 16px 40px 16px', 
+                borderRadius: 12, 
+                border: 'none', 
+                fontSize: 'clamp(16px, 4vw, 19px)', 
+                background: palette.bg, 
+                resize: 'none', 
+                fontWeight: 600, 
+                color: palette.text, 
+                boxSizing: 'border-box', 
+                minHeight: 90 
+              }}
               disabled={pollStarted}
             />
-            <div style={{ position: 'absolute', right: 18, bottom: 12, color: palette.textSecondary, fontSize: 15 }}>{question.length}/100</div>
+            <div style={{ 
+              position: 'absolute', 
+              right: 16, 
+              bottom: 12, 
+              color: palette.textSecondary, 
+              fontSize: 'clamp(13px, 3.5vw, 15px)' 
+            }}>
+              {question.length}/100
+            </div>
           </div>
+          
           {/* Edit Options */}
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
-            <div style={{ fontWeight: 700, fontSize: 18, color: palette.text, flex: 1 }}>Edit Options</div>
-            <div style={{ fontWeight: 700, fontSize: 18, color: palette.text, minWidth: 160, textAlign: 'center' }}>Is it Correct?</div>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            gap: '8px',
+            marginBottom: 12 
+          }}>
+            <div style={{ 
+              fontWeight: 700, 
+              fontSize: 'clamp(16px, 4vw, 18px)', 
+              color: palette.text 
+            }}>
+              Edit Options
+            </div>
+            <div style={{ 
+              fontWeight: 600, 
+              fontSize: 'clamp(14px, 3.5vw, 16px)', 
+              color: palette.textSecondary,
+              textAlign: 'center'
+            }}>
+              Mark the correct answer
+            </div>
           </div>
+          
           {options.map((opt, idx) => (
-            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 18, marginBottom: 16 }}>
-              <div style={{ background: palette.primary, color: '#fff', borderRadius: '50%', width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 18 }}>{idx + 1}</div>
-              <input
-                type="text"
-                value={opt.text}
-                onChange={e => handleOptionChange(idx, e.target.value)}
-                placeholder={`Option ${idx + 1}`}
-                style={{ flex: 1, padding: '14px 18px', borderRadius: 10, border: 'none', fontSize: 16, background: palette.bg, fontWeight: 600, color: palette.text, boxSizing: 'border-box' }}
-                disabled={pollStarted}
-                required
-              />
-              <div style={{ display: 'flex', alignItems: 'center', gap: 18, minWidth: 160, justifyContent: 'center' }}>
-                <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: palette.primary, fontSize: 16 }}>
-                  <input type="radio" name={`correct${idx}`} checked={opt.correct === true} onChange={() => handleCorrectChange(idx, true)} disabled={pollStarted} style={{ accentColor: palette.primary, width: 18, height: 18, marginRight: 2 }} /> Yes
+            <div key={idx} style={{ 
+              display: 'flex', 
+              flexDirection: 'column',
+              gap: 12, 
+              marginBottom: 16,
+              padding: '16px',
+              background: palette.bg,
+              borderRadius: 12
+            }}>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 12 
+              }}>
+                <div style={{ 
+                  background: palette.primary, 
+                  color: '#fff', 
+                  borderRadius: '50%', 
+                  width: 'clamp(28px, 7vw, 32px)', 
+                  height: 'clamp(28px, 7vw, 32px)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  fontWeight: 800, 
+                  fontSize: 'clamp(14px, 3.5vw, 18px)' 
+                }}>
+                  {idx + 1}
+                </div>
+                <input
+                  type="text"
+                  value={opt.text}
+                  onChange={e => handleOptionChange(idx, e.target.value)}
+                  placeholder={`Option ${idx + 1}`}
+                  style={{ 
+                    flex: 1, 
+                    padding: '12px 16px', 
+                    borderRadius: 10, 
+                    border: 'none', 
+                    fontSize: 'clamp(14px, 3.5vw, 16px)', 
+                    background: '#fff', 
+                    fontWeight: 600, 
+                    color: palette.text, 
+                    boxSizing: 'border-box' 
+                  }}
+                  disabled={pollStarted}
+                  required
+                />
+              </div>
+              
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                gap: 24
+              }}>
+                <label style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: 8, 
+                  fontWeight: 700, 
+                  color: palette.primary, 
+                  fontSize: 'clamp(14px, 3.5vw, 16px)' 
+                }}>
+                  <input 
+                    type="radio" 
+                    name={`correct${idx}`} 
+                    checked={opt.correct === true} 
+                    onChange={() => handleCorrectChange(idx, true)} 
+                    disabled={pollStarted} 
+                    style={{ 
+                      accentColor: palette.primary, 
+                      width: 18, 
+                      height: 18, 
+                      marginRight: 4 
+                    }} 
+                  /> 
+                  Correct
                 </label>
-                <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: palette.textSecondary, fontSize: 16 }}>
-                  <input type="radio" name={`correct${idx}`} checked={opt.correct === false} onChange={() => handleCorrectChange(idx, false)} disabled={pollStarted} style={{ accentColor: palette.primary, width: 18, height: 18, marginRight: 2 }} /> No
+                <label style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: 8, 
+                  fontWeight: 700, 
+                  color: palette.textSecondary, 
+                  fontSize: 'clamp(14px, 3.5vw, 16px)' 
+                }}>
+                  <input 
+                    type="radio" 
+                    name={`correct${idx}`} 
+                    checked={opt.correct === false} 
+                    onChange={() => handleCorrectChange(idx, false)} 
+                    disabled={pollStarted} 
+                    style={{ 
+                      accentColor: palette.primary, 
+                      width: 18, 
+                      height: 18, 
+                      marginRight: 4 
+                    }} 
+                  /> 
+                  Incorrect
                 </label>
               </div>
             </div>
           ))}
-          <button type="button" onClick={addOption} disabled={pollStarted} style={{ background: '#fff', color: palette.primary, border: `1.5px solid ${palette.primary}`, borderRadius: 10, padding: '10px 26px', fontWeight: 700, fontSize: 16, marginBottom: 32, cursor: pollStarted ? 'not-allowed' : 'pointer', transition: 'all 0.2s', marginTop: 8 }}>
-            + Add More option
+          
+          <button 
+            type="button" 
+            onClick={addOption} 
+            disabled={pollStarted} 
+            style={{ 
+              background: '#fff', 
+              color: palette.primary, 
+              border: `1.5px solid ${palette.primary}`, 
+              borderRadius: 10, 
+              padding: '12px 20px', 
+              fontWeight: 700, 
+              fontSize: 'clamp(14px, 3.5vw, 16px)', 
+              marginBottom: 24, 
+              cursor: pollStarted ? 'not-allowed' : 'pointer', 
+              transition: 'all 0.2s', 
+              marginTop: 8,
+              width: '100%',
+              maxWidth: '200px'
+            }}
+          >
+            + Add More Option
           </button>
           
-          {/* Ask Question Button - moved near the form */}
-          <div style={{ textAlign: 'center', marginTop: 32 }}>
+          {/* Ask Question Button */}
+          <div style={{ textAlign: 'center', marginTop: 24 }}>
             <button
               type="submit"
               disabled={pollStarted || !question.trim() || options.some(opt => !opt.text.trim())}
@@ -184,21 +395,170 @@ const TeacherDashboard = () => {
                 background: 'linear-gradient(90deg, #7765DA 0%, #4F0DCE 100%)',
                 color: '#fff',
                 border: 'none',
-                borderRadius: 32,
-                padding: '20px 60px',
+                borderRadius: 24,
+                padding: '16px 32px',
                 fontWeight: 800,
-                fontSize: 22,
+                fontSize: 'clamp(16px, 4vw, 22px)',
                 cursor: pollStarted || !question.trim() || options.some(opt => !opt.text.trim()) ? 'not-allowed' : 'pointer',
                 boxShadow: '0 2px 16px #7765DA22',
                 transition: 'all 0.2s',
                 opacity: pollStarted || !question.trim() || options.some(opt => !opt.text.trim()) ? 0.6 : 1,
+                width: '100%',
+                maxWidth: '300px',
+                minHeight: '56px'
               }}
             >
               {pollStarted ? 'Poll Active...' : 'Ask Question'}
             </button>
           </div>
         </form>
+
+        {/* Results */}
+        {showResults && (
+          <div style={{ marginTop: 32 }}>
+            <PollResults results={results} />
+            <div style={{ textAlign: 'center', marginTop: 24 }}>
+              <button
+                onClick={handleAskNewQuestion}
+                style={{
+                  background: palette.primary,
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 24,
+                  padding: '12px 24px',
+                  fontWeight: 700,
+                  fontSize: 'clamp(14px, 3.5vw, 16px)',
+                  cursor: 'pointer',
+                  minHeight: '48px'
+                }}
+              >
+                Ask New Question
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* History Button */}
+        <div style={{ textAlign: 'center', marginTop: 32 }}>
+          <button
+            onClick={handleShowHistory}
+            style={{
+              background: 'transparent',
+              color: palette.primary,
+              border: `2px solid ${palette.primary}`,
+              borderRadius: 24,
+              padding: '12px 24px',
+              fontWeight: 700,
+              fontSize: 'clamp(14px, 3.5vw, 16px)',
+              cursor: 'pointer',
+              minHeight: '48px'
+            }}
+          >
+            View Poll History
+          </button>
+        </div>
+
+        {/* Floating Chat/Participants Modal */}
+        <div style={{
+          position: 'fixed',
+          bottom: 20,
+          right: 20,
+          zIndex: 1000,
+          width: 'calc(100vw - 40px)',
+          maxWidth: 400
+        }}>
+          <ChatPopup 
+            messages={messages}
+            onSendMessage={handleSendMessage}
+            chatInput={chatInput}
+            setChatInput={setChatInput}
+            students={students}
+            onKickStudent={kickStudent}
+          />
+        </div>
       </div>
+
+      {/* History Modal */}
+      {showHistory && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0,0,0,0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 2000,
+          padding: '20px'
+        }}>
+          <div style={{
+            background: '#fff',
+            borderRadius: 16,
+            padding: '24px',
+            maxWidth: 600,
+            width: '100%',
+            maxHeight: '80vh',
+            overflow: 'auto'
+          }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 24
+            }}>
+              <h3 style={{
+                fontWeight: 700,
+                fontSize: 'clamp(20px, 5vw, 24px)',
+                color: palette.text
+              }}>
+                Poll History
+              </h3>
+              <button
+                onClick={handleHideHistory}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  fontSize: 24,
+                  cursor: 'pointer',
+                  color: palette.textSecondary
+                }}
+              >
+                ×
+              </button>
+            </div>
+            
+            {history.map((poll, idx) => (
+              <div key={idx} style={{
+                background: palette.bg,
+                borderRadius: 12,
+                padding: '16px',
+                marginBottom: 16
+              }}>
+                <div style={{
+                  fontWeight: 700,
+                  fontSize: 'clamp(16px, 4vw, 18px)',
+                  color: palette.text,
+                  marginBottom: 8
+                }}>
+                  {poll.question}
+                </div>
+                <div style={{
+                  fontSize: 'clamp(14px, 3.5vw, 16px)',
+                  color: palette.textSecondary
+                }}>
+                  Options: {poll.options.join(', ')}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
       {/* Chat and other sections */}
       <ChatPopup userName="Teacher" />
       {/* Results section */}

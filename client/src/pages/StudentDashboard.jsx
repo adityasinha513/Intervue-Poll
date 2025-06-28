@@ -116,15 +116,22 @@ const StudentDashboard = () => {
 
   if (kickedOut) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', padding: 20 }}>
+      <div style={{ 
+        minHeight: '100vh', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        background: '#fff', 
+        padding: '20px',
+        boxSizing: 'border-box'
+      }}>
         <div style={{
           background: '#fff',
-          padding: '40px 32px',
+          padding: '32px 24px',
           borderRadius: 16,
           boxShadow: '0 4px 32px rgba(0,0,0,0.06)',
-          minWidth: 350,
-          maxWidth: 400,
           width: '100%',
+          maxWidth: 400,
           textAlign: 'center',
         }}>
           <div style={{ marginBottom: 24 }}>
@@ -141,7 +148,7 @@ const StudentDashboard = () => {
           </div>
           <h2 style={{
             fontWeight: 700,
-            fontSize: '2rem',
+            fontSize: 'clamp(1.5rem, 5vw, 2rem)',
             marginBottom: 8,
             color: '#22223b',
             lineHeight: 1.1,
@@ -150,11 +157,12 @@ const StudentDashboard = () => {
           </h2>
           <div style={{
             color: '#6E6E6E',
-            fontSize: 16,
+            fontSize: 'clamp(14px, 4vw, 16px)',
             marginTop: 12,
             fontWeight: 500,
+            lineHeight: 1.4
           }}>
-            Looks like the teacher had removed you from the poll system. Please<br />Try again sometime.
+            Looks like the teacher had removed you from the poll system. Please try again sometime.
           </div>
         </div>
       </div>
@@ -162,169 +170,309 @@ const StudentDashboard = () => {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#fff", display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 48 }}>
+    <div style={{ 
+      minHeight: "100vh", 
+      background: "#fff", 
+      display: "flex", 
+      flexDirection: "column", 
+      alignItems: "center", 
+      padding: "20px",
+      boxSizing: "border-box"
+    }}>
       {/* Bold, dark greeting */}
-      <h2 style={{ fontWeight: 800, fontSize: 28, marginBottom: 24, color: '#22223b', letterSpacing: 0.2 }}>
+      <h2 style={{ 
+        fontWeight: 800, 
+        fontSize: 'clamp(24px, 6vw, 28px)', 
+        marginBottom: 24, 
+        color: '#22223b', 
+        letterSpacing: 0.2,
+        textAlign: 'center'
+      }}>
         Hello, {name}!
       </h2>
+      
       {currentPoll ? (
         <div style={{ width: "100%", maxWidth: 600, margin: "0 auto" }}>
           {/* Top bar: Question number and timer */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginBottom: 8 }}>
-            <div style={{ fontWeight: 700, fontSize: 20 }}>Question 1</div>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between',
+            gap: 18, 
+            marginBottom: 8,
+            flexWrap: 'wrap'
+          }}>
+            <div style={{ fontWeight: 700, fontSize: 'clamp(16px, 4vw, 20px)' }}>Question 1</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ fontSize: 18 }}>⏱️</span>
-              <span style={{ fontWeight: 700, color: timer <= 10 ? '#E53935' : '#222', fontSize: 16 }}>{`00:${timer.toString().padStart(2, '0')}`}</span>
+              <span style={{ fontSize: 'clamp(16px, 4vw, 18px)' }}>⏱️</span>
+              <span style={{ 
+                fontWeight: 700, 
+                color: timer <= 10 ? '#E53935' : '#222', 
+                fontSize: 'clamp(14px, 4vw, 16px)' 
+              }}>
+                {`00:${timer.toString().padStart(2, '0')}`}
+              </span>
             </div>
           </div>
+          
           {/* Question bar */}
-          <div style={{ background: 'linear-gradient(90deg, #22223b 80%, #444 100%)', color: '#fff', borderRadius: 8, padding: '12px 18px', fontWeight: 700, fontSize: 17, marginBottom: 18, boxShadow: '0 2px 8px #0001' }}>
+          <div style={{ 
+            background: 'linear-gradient(90deg, #22223b 80%, #444 100%)', 
+            color: '#fff', 
+            borderRadius: 8, 
+            padding: 'clamp(12px, 3vw, 18px)', 
+            fontWeight: 700, 
+            fontSize: 'clamp(15px, 4vw, 17px)', 
+            marginBottom: 18, 
+            boxShadow: '0 2px 8px #0001',
+            lineHeight: 1.3
+          }}>
             {currentPoll.question}
           </div>
+          
           {/* Options as selectable buttons */}
           <form onSubmit={handleSubmit}>
-            <div style={{ background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0001', padding: 0, marginBottom: 24 }}>
+            <div style={{ 
+              background: '#fff', 
+              borderRadius: 12, 
+              boxShadow: '0 2px 8px #0001', 
+              padding: 0, 
+              marginBottom: 24 
+            }}>
               {(currentPoll.options || []).map((opt, idx) => (
                 <div
                   key={idx}
                   onClick={() => !submitted && setSelected(opt)}
                   style={{
-                    display: 'flex', alignItems: 'center', marginBottom: 0, borderBottom: idx < (currentPoll.options.length - 1) ? '1px solid #eee' : 'none',
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    marginBottom: 0, 
+                    borderBottom: idx < (currentPoll.options.length - 1) ? '1px solid #eee' : 'none',
                     background: selected === opt ? '#7765DA33' : '#f8f8fa',
                     borderRadius: idx === 0 ? '12px 12px 0 0' : idx === (currentPoll.options.length - 1) ? '0 0 12px 12px' : 0,
-                    padding: 0,
+                    padding: 'clamp(16px, 4vw, 20px)',
                     cursor: submitted ? 'not-allowed' : 'pointer',
                     transition: 'background 0.2s',
+                    minHeight: '60px'
                   }}
                 >
                   <div style={{
-                    background: '#7765DA', color: '#fff', borderRadius: '50%', width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 18, margin: '0 18px'
-                  }}>{idx + 1}</div>
-                  <div style={{ flex: 1, fontWeight: 700, fontSize: 16, color: '#22223b' }}>{opt}</div>
+                    width: 20,
+                    height: 20,
+                    borderRadius: '50%',
+                    border: selected === opt ? '2px solid #7765DA' : '2px solid #ddd',
+                    background: selected === opt ? '#7765DA' : 'transparent',
+                    marginRight: 16,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    {selected === opt && (
+                      <div style={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: '50%',
+                        background: '#fff'
+                      }} />
+                    )}
+                  </div>
+                  <span style={{
+                    fontSize: 'clamp(15px, 4vw, 17px)',
+                    fontWeight: 600,
+                    color: '#22223b',
+                    flex: 1,
+                    lineHeight: 1.3
+                  }}>
+                    {opt}
+                  </span>
                 </div>
               ))}
             </div>
-            <button
-              type="submit"
-              disabled={!selected || submitted}
-              style={{
-                display: 'block',
-                margin: '0 auto',
-                background: 'linear-gradient(90deg, #7765DA 0%, #4F0DCE 100%)',
-                color: '#fff',
-                border: 'none',
-                borderRadius: 32,
-                padding: '14px 48px',
-                fontWeight: 800,
-                fontSize: 18,
-                cursor: !selected || submitted ? 'not-allowed' : 'pointer',
-                boxShadow: '0 2px 8px #7765DA22',
-                opacity: !selected || submitted ? 0.6 : 1,
-                marginBottom: 16,
-                marginTop: 8,
-                transition: 'all 0.2s',
-              }}
-            >
-              {submitted ? 'Submitted' : 'Submit'}
-            </button>
-          </form>
-          {/* Waiting message */}
-          {submitted && (
-            <div style={{ textAlign: 'center', fontWeight: 700, fontSize: 22, marginTop: 32 }}>
-              Wait for the teacher to ask a new question.
-            </div>
-          )}
-        </div>
-      ) : (
-        <div style={{ fontSize: 20, color: "#888", fontWeight: 500, marginTop: 80, textAlign: 'center' }}>
-          Wait for the teacher to ask a new question…
-        </div>
-      )}
-      {/* Floating chat/participants modal at bottom right */}
-      <div style={{ position: 'fixed', bottom: 32, right: 32, zIndex: 2000, width: 380, background: '#fff', borderRadius: 16, boxShadow: '0 4px 24px rgba(0,0,0,0.13)' }}>
-        <div style={{ display: "flex", borderBottom: "1px solid #eee", marginBottom: 0 }}>
-          {TABS.map((t) => (
-            <div
-              key={t}
-              onClick={() => setTab(t)}
-              style={{
-                flex: 1,
-                textAlign: "center",
-                padding: "12px 0 8px 0",
-                fontWeight: tab === t ? 700 : 500,
-                color: tab === t ? "#22223b" : "#888",
-                borderBottom: tab === t ? "3px solid #7765DA" : "3px solid transparent",
-                cursor: "pointer",
-                fontSize: 17,
-                letterSpacing: 0.2,
-                background: "#fff",
-                transition: "all 0.2s"
-              }}
-            >
-              {t}
-            </div>
-          ))}
-        </div>
-        {tab === "Chat" ? (
-          <>
-            <div style={{ maxHeight: 220, overflowY: "auto", marginBottom: 16, padding: 16, borderRadius: 12, background: "#f9f9f9", boxShadow: "0 2px 8px #0000001a" }}>
-              {messages.map((msg, index) => (
-                <div key={index} style={{ marginBottom: 12 }}>
-                  <div style={{ fontSize: 14, color: "#555" }}>{msg?.time || ""}</div>
-                  <div style={{ fontWeight: 500, fontSize: 16 }}>{msg?.sender || "Unknown"}:</div>
-                  <div style={{ fontSize: 15, color: "#333" }}>{msg?.text || ""}</div>
-                </div>
-              ))}
-            </div>
-            <form onSubmit={handleSend} style={{ display: "flex", gap: 8, padding: '0 16px 16px 16px' }}>
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type your message..."
-                style={{
-                  flex: 1,
-                  padding: "12px 16px",
-                  borderRadius: 24,
-                  border: "1px solid #ddd",
-                  fontSize: 16,
-                  outline: "none",
-                  transition: "border-color 0.3s",
-                }}
-                onFocus={(e) => (e.target.style.borderColor = "#6366f1")}
-                onBlur={(e) => (e.target.style.borderColor = "#ddd")}
-              />
+            
+            {/* Submit button */}
+            {!submitted && selected && (
               <button
                 type="submit"
                 style={{
-                  padding: "12px 24px",
-                  borderRadius: 24,
-                  background: "#6366f1",
-                  color: "#fff",
+                  width: '100%',
+                  background: '#7765DA',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 12,
+                  padding: '16px 24px',
+                  fontSize: 'clamp(16px, 4vw, 18px)',
                   fontWeight: 700,
-                  fontSize: 17,
-                  border: "none",
-                  cursor: "pointer",
-                  boxShadow: "0 2px 8px #6366f122",
+                  cursor: 'pointer',
+                  marginBottom: 24,
+                  minHeight: '56px'
                 }}
               >
-                Send
+                Submit Answer
               </button>
-            </form>
-          </>
-        ) : (
-          <div style={{ marginTop: 16, padding: '0 16px 16px 16px' }}>
-            <div style={{ fontWeight: 600, fontSize: 15, color: '#888', marginBottom: 12, marginLeft: 4 }}>Name</div>
-            <div>
-              {students.map((name, idx) => (
-                <div key={idx} style={{ fontWeight: 700, fontSize: 16, color: '#22223b', marginBottom: 10 }}>{name}</div>
-              ))}
-            </div>
+            )}
+          </form>
+          
+          {/* Results */}
+          {showResults && (
+            <PollResults results={results} />
+          )}
+        </div>
+      ) : (
+        <div style={{
+          textAlign: 'center',
+          color: '#6b7280',
+          fontSize: 'clamp(16px, 4vw, 18px)',
+          marginTop: 40
+        }}>
+          Waiting for the teacher to start a poll...
+        </div>
+      )}
+      
+      {/* Floating Chat/Participants Modal */}
+      <div style={{
+        position: 'fixed',
+        bottom: 20,
+        right: 20,
+        zIndex: 1000,
+        width: 'calc(100vw - 40px)',
+        maxWidth: 400
+      }}>
+        <div style={{
+          background: '#fff',
+          borderRadius: 16,
+          boxShadow: '0 4px 24px rgba(0,0,0,0.15)',
+          overflow: 'hidden',
+          border: '1px solid #e9ecef'
+        }}>
+          {/* Tab Headers */}
+          <div style={{
+            display: 'flex',
+            borderBottom: '1px solid #e9ecef'
+          }}>
+            {TABS.map((tabName) => (
+              <button
+                key={tabName}
+                onClick={() => setTab(tabName)}
+                style={{
+                  flex: 1,
+                  padding: '12px 16px',
+                  background: tab === tabName ? '#7765DA' : 'transparent',
+                  color: tab === tabName ? '#fff' : '#6b7280',
+                  border: 'none',
+                  fontSize: 'clamp(14px, 3.5vw, 16px)',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s'
+                }}
+              >
+                {tabName}
+              </button>
+            ))}
           </div>
-        )}
+          
+          {/* Tab Content */}
+          <div style={{
+            maxHeight: 300,
+            overflow: 'hidden'
+          }}>
+            {tab === "Chat" ? (
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: 300
+              }}>
+                <div style={{
+                  flex: 1,
+                  overflowY: 'auto',
+                  padding: '16px',
+                  background: '#fafaff'
+                }}>
+                  {messages.map((msg, idx) => (
+                    <div key={idx} style={{
+                      marginBottom: 12,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: msg.sender === name ? 'flex-end' : 'flex-start'
+                    }}>
+                      <span style={{
+                        color: msg.sender === name ? '#7765DA' : '#22223b',
+                        fontWeight: 600,
+                        fontSize: 'clamp(12px, 3vw, 14px)',
+                        marginBottom: 2
+                      }}>
+                        {msg.sender === name ? 'You' : msg.sender}
+                      </span>
+                      <span style={{
+                        background: msg.sender === name ? '#e9e6fd' : '#22223b',
+                        color: msg.sender === name ? '#7765DA' : '#fff',
+                        borderRadius: 8,
+                        padding: '8px 12px',
+                        fontSize: 'clamp(13px, 3.5vw, 15px)',
+                        fontWeight: 500,
+                        maxWidth: '80%',
+                        wordBreak: 'break-word',
+                        display: 'inline-block'
+                      }}>
+                        {msg.text}
+                      </span>
+                      <span style={{
+                        fontSize: 'clamp(10px, 2.5vw, 12px)',
+                        color: '#999',
+                        marginTop: 2
+                      }}>
+                        {msg.time}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <form onSubmit={handleSend} style={{
+                  display: 'flex',
+                  borderTop: '1px solid #e9ecef',
+                  padding: '12px',
+                  background: '#fff'
+                }}>
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Type a message..."
+                    style={{
+                      flex: 1,
+                      border: 'none',
+                      outline: 'none',
+                      fontSize: 'clamp(14px, 3.5vw, 16px)',
+                      background: 'transparent',
+                      color: '#22223b',
+                      padding: '8px 12px'
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    disabled={!input.trim()}
+                    style={{
+                      background: '#7765DA',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: 8,
+                      padding: '8px 16px',
+                      fontWeight: 600,
+                      fontSize: 'clamp(13px, 3.5vw, 15px)',
+                      marginLeft: 8,
+                      cursor: input.trim() ? 'pointer' : 'not-allowed',
+                      opacity: input.trim() ? 1 : 0.6
+                    }}
+                  >
+                    Send
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <ParticipantsList students={students} />
+            )}
+          </div>
+        </div>
       </div>
-      {/* Chatbot Component */}
-      <ChatBot userName={name} />
     </div>
   );
 };
